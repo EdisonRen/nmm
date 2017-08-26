@@ -9,7 +9,7 @@
 
 # intellij
 .idea/
-nmm-parent.iml
+*.iml
 
 # MAC
 .DS_Store
