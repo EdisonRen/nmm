@@ -4,11 +4,12 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
+# intellij
+.idea/
+nmm-parent.iml
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# MAC
+.DS_Store
 
 # Package Files #
 *.jar
