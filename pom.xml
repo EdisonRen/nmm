@@ -14,6 +14,8 @@
     <java.version>1.8</java.version>
     <spring.boot.version>1.4.1.RELEASE</spring.boot.version>
     <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+    <fasterxml.jackson.version>2.6.3</fasterxml.jackson.version>
+    <javax.servlet.version>2.5</javax.servlet.version>
     <junit.version>4.12</junit.version>
   </properties>
 
@@ -25,6 +27,12 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${fasterxml.jackson.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
