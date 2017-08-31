@@ -1,4 +1,4 @@
-package com.edisonren.nmm;
+package com.edisonren.nmm.v1;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,10 +8,10 @@ import javax.servlet.ServletRequest;
 /**
  * Scenario defines the situation that a mocked response is returned.
  * <p>
- * Scenario can be determined by payload, remoteAddr, remoteHost and remotePort.
+ * Scenario can be determined by payload, remoteAddress, remoteHost and remotePort.
  * <p>
- *
- * *
+ * Eech Non-null property is used to evaluate the <code>scenario</code>
+ * <p>
  * Created by edison on 8/27/17.
  */
 public class Scenario {
