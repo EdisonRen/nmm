@@ -32,6 +32,11 @@
       <artifactId>nmm-api</artifactId>
       <version>${nmm.api.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
