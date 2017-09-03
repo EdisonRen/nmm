@@ -10,7 +10,7 @@ package com.edisonren.nmm.v1;
 public class NmmResponse {
 
     private Scenario scenario;
-    private String scenarioId; // UUID: S-xxx
+    private ScenarioInfo scenarioInfo;
     private Integer mockVer;   // like optimistic lock
 
     public NmmResponse() {
@@ -24,19 +24,19 @@ public class NmmResponse {
         this.scenario = scenario;
     }
 
-    public String getScenarioId() {
-        return scenarioId;
-    }
-
-    public void setScenarioId(String scenarioId) {
-        this.scenarioId = scenarioId;
-    }
-
     public Integer getMockVer() {
         return mockVer;
     }
 
     public void setMockVer(Integer mockVer) {
         this.mockVer = mockVer;
+    }
+
+    public ScenarioInfo getScenarioInfo() {
+        return scenarioInfo;
+    }
+
+    public void setScenarioInfo(ScenarioInfo scenarioInfo) {
+        this.scenarioInfo = scenarioInfo;
     }
 }

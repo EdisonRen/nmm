@@ -17,6 +17,8 @@
     <fasterxml.jackson.version>2.6.3</fasterxml.jackson.version>
     <javax.servlet.version>2.5</javax.servlet.version>
     <junit.version>4.12</junit.version>
+
+    <nmm.api.version>1.0-SNAPSHOT</nmm.api.version>
   </properties>
 
   <modules>
@@ -38,6 +40,12 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <version>1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

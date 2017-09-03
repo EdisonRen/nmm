@@ -26,6 +26,12 @@
       <version>${spring.boot.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.edisonren.nmm</groupId>
+      <artifactId>nmm-api</artifactId>
+      <version>${nmm.api.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
