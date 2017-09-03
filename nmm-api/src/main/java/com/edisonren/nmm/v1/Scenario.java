@@ -1,12 +1,14 @@
 package com.edisonren.nmm.v1;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import javax.servlet.ServletRequest;
+import java.io.Serializable;
 
 /**
  * Scenario defines the situation that a mocked response is returned.
@@ -17,7 +19,10 @@ import javax.servlet.ServletRequest;
  * <p>
  * Created by edison on 8/27/17.
  */
-public class Scenario {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize
+public class Scenario implements Serializable {
+    private static final long serialVersionUID = 3L;
 
     // ----------------------------------------------------------------
     // This field is required
@@ -50,9 +55,7 @@ public class Scenario {
     // parameter values
     @Nullable private String[] parameters;
 
-    public Scenario(ServletRequest request) {
-        // TODO
-    }
+    public Scenario() {}
 
     public Boolean isMatched(ServletRequest request) {
         // TODO
