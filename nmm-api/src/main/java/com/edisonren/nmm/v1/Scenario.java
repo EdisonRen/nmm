@@ -4,11 +4,13 @@ package com.edisonren.nmm.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.servlet.ServletRequest;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Scenario defines the situation that a mocked response is returned.
@@ -53,19 +55,38 @@ public class Scenario implements Serializable {
     // request body
     @Nullable private JsonNode payload;
     // parameter values
-    @Nullable private String[] parameters;
+    @Nullable private Set<String> parameters;
 
     public Scenario() {}
 
-    public Boolean isMatched(ServletRequest request) {
-        // TODO
-        return true;
-    }
-
     @Override
     public int hashCode() {
-        // TODO: hashCodeBuilder
-        return 1;
+        return new HashCodeBuilder(17, 37)
+                .append(serviceName)
+                .append(remoteAddr)
+                .append(remoteHost)
+                .append(payload)
+                .append(parameters)
+                .toHashCode();
+    }
+
+    // The sequence of parameters matters, or this function would be too expensive.
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Scenario)) return false;
+
+        Scenario scenario = (Scenario) o;
+
+        if (!getServiceName().equals(scenario.getServiceName())) return false;
+        if (getRemoteAddr() != null ? !getRemoteAddr().equals(scenario.getRemoteAddr()) : scenario.getRemoteAddr() != null)
+            return false;
+        if (getRemoteHost() != null ? !getRemoteHost().equals(scenario.getRemoteHost()) : scenario.getRemoteHost() != null)
+            return false;
+        if (getPayload() != null ? !getPayload().equals(scenario.getPayload()) : scenario.getPayload() != null)
+            return false;
+        return getParameters() != null ? getParameters().equals(scenario.getParameters()) : scenario.getParameters() == null;
     }
 
     // ---- nothing interesting below ----
@@ -77,11 +98,13 @@ public class Scenario implements Serializable {
         this.payload = payload;
     }
 
-    public String[] getParameters() {
+    @Nullable
+    public Set<String> getParameters() {
+        if (parameters == null) parameters = new HashSet<>();
         return parameters;
     }
 
-    public void setParameters(String[] parameters) {
+    public void setParameters(@Nullable Set<String> parameters) {
         this.parameters = parameters;
     }
 
