@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,7 +24,6 @@ public class Controller {
         return "This shit works"; // TODO: use something more informative, or at least appropriate
     }
 
-    @ResponseBody
     @RequestMapping(value = "/currentVersion",
             produces = {MediaType.TEXT_PLAIN_VALUE},
             method = RequestMethod.GET)
@@ -34,7 +32,6 @@ public class Controller {
 
     }
 
-    @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -42,12 +39,6 @@ public class Controller {
         return null;
     }
 
-    /**
-     *
-     * @param senario only
-     * @return
-     */
-    @ResponseBody
     @RequestMapping(value = "/view", method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -55,7 +46,6 @@ public class Controller {
         return null;
     }
 
-    @ResponseBody
     @RequestMapping(value = "/{scenarioId}", method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public NmmResponse getNmmResponseByLoanId(@PathVariable("scenarioId") String scenarioId) {
