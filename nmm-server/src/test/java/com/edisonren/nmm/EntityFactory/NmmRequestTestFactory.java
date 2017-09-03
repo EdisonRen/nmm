@@ -1,8 +1,7 @@
 package com.edisonren.nmm.EntityFactory;
 
 import com.edisonren.nmm.v1.NmmRequest;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by edison on 9/3/17.
@@ -10,12 +9,12 @@ import com.google.gson.Gson;
 public class NmmRequestTestFactory {
     private static final String RAW_JSON = "{\"a\": \"yoyoyoyo\"}";
 
-    private static Gson parser = new Gson();
+    private static ObjectMapper mapper = new ObjectMapper();
 
-    public static NmmRequest create() {
+    public static NmmRequest create() throws Exception {
         NmmRequest res = new NmmRequest();
         res.setScenario(ScenarioTestFactory.create());
-        res.setResponse(parser.fromJson(RAW_JSON, JsonNode.class));
+        res.setResponse(mapper.readTree(RAW_JSON));
         return res;
     }
 }

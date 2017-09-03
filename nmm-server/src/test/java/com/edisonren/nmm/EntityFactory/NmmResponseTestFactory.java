@@ -7,7 +7,7 @@ import com.edisonren.nmm.v1.NmmResponse;
  */
 public class NmmResponseTestFactory {
 
-    public static NmmResponse create() {
+    public static NmmResponse create() throws Exception {
         NmmResponse res = new NmmResponse();
         res.setMockVer(0);
         res.setScenario(ScenarioTestFactory.create());

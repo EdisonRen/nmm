@@ -8,7 +8,7 @@ import com.edisonren.nmm.v1.Scenario;
 public class ScenarioTestFactory {
     public static final String SERVICE_NAME = "TEST-SERVICE";
 
-    public static Scenario create() {
+    public static Scenario create() throws Exception {
         Scenario res = new Scenario();
         res.setServiceName(SERVICE_NAME);
         return res;
