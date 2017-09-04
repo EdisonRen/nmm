@@ -42,10 +42,13 @@ public class Scenario implements Serializable {
     // If not given, any traffic intercepted by the client is parsed to match the payload
     // , which is quite an expensive operation.
     // ----------------------------------------------------------------
-    // IP address of the client or last proxy that sent the request
-    @Nullable private String remoteAddr;
+    // IP v4 addresses of the client or last proxy that sent the request
+    @Nullable private Set<String> includeRemoteAddr;
+    @Nullable private Set<String> excludeRemoteAddr;
+
     // fully qualified name of the client or the last proxy that sent the request
-    @Nullable private String remoteHost;
+    @Nullable private Set<String> includeRemoteHost;
+    @Nullable private Set<String> excludeRemoteHost;
 
     // ------------- the two fields below are fine tuners -------------
     // If provided, these two fields are used to match the scenario with the request.
@@ -63,14 +66,14 @@ public class Scenario implements Serializable {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(serviceName)
-                .append(remoteAddr)
-                .append(remoteHost)
+                .append(includeRemoteAddr)
+                .append(excludeRemoteAddr)
+                .append(includeRemoteHost)
+                .append(excludeRemoteHost)
                 .append(payload)
                 .append(parameters)
                 .toHashCode();
     }
-
-    // The sequence of parameters matters, or this function would be too expensive.
 
     @Override
     public boolean equals(Object o) {
@@ -80,13 +83,22 @@ public class Scenario implements Serializable {
         Scenario scenario = (Scenario) o;
 
         if (!getServiceName().equals(scenario.getServiceName())) return false;
-        if (getRemoteAddr() != null ? !getRemoteAddr().equals(scenario.getRemoteAddr()) : scenario.getRemoteAddr() != null)
+        if (getIncludeRemoteAddr() != null ?
+                !getIncludeRemoteAddr().equals(scenario.getIncludeRemoteAddr()) : scenario.getIncludeRemoteAddr() != null)
             return false;
-        if (getRemoteHost() != null ? !getRemoteHost().equals(scenario.getRemoteHost()) : scenario.getRemoteHost() != null)
+        if (getExcludeRemoteAddr() != null ?
+                !getExcludeRemoteAddr().equals(scenario.getExcludeRemoteAddr()) : scenario.getExcludeRemoteAddr() != null)
+            return false;
+        if (getIncludeRemoteHost() != null ?
+                !getIncludeRemoteHost().equals(scenario.getIncludeRemoteHost()) : scenario.getIncludeRemoteHost() != null)
+            return false;
+        if (getExcludeRemoteHost() != null ?
+                !getExcludeRemoteHost().equals(scenario.getExcludeRemoteHost()) : scenario.getExcludeRemoteHost() != null)
             return false;
         if (getPayload() != null ? !getPayload().equals(scenario.getPayload()) : scenario.getPayload() != null)
             return false;
-        return getParameters() != null ? getParameters().equals(scenario.getParameters()) : scenario.getParameters() == null;
+        return getParameters() != null ?
+                getParameters().equals(scenario.getParameters()) : scenario.getParameters() == null;
     }
 
     // ---- nothing interesting below ----
@@ -104,24 +116,44 @@ public class Scenario implements Serializable {
         return parameters;
     }
 
+    @Nullable
+    public Set<String> getIncludeRemoteAddr() {
+        return includeRemoteAddr;
+    }
+
+    public void setIncludeRemoteAddr(@Nullable Set<String> includeRemoteAddr) {
+        this.includeRemoteAddr = includeRemoteAddr;
+    }
+
+    @Nullable
+    public Set<String> getExcludeRemoteAddr() {
+        return excludeRemoteAddr;
+    }
+
+    public void setExcludeRemoteAddr(@Nullable Set<String> excludeRemoteAddr) {
+        this.excludeRemoteAddr = excludeRemoteAddr;
+    }
+
+    @Nullable
+    public Set<String> getIncludeRemoteHost() {
+        return includeRemoteHost;
+    }
+
+    public void setIncludeRemoteHost(@Nullable Set<String> includeRemoteHost) {
+        this.includeRemoteHost = includeRemoteHost;
+    }
+
+    @Nullable
+    public Set<String> getExcludeRemoteHost() {
+        return excludeRemoteHost;
+    }
+
+    public void setExcludeRemoteHost(@Nullable Set<String> excludeRemoteHost) {
+        this.excludeRemoteHost = excludeRemoteHost;
+    }
+
     public void setParameters(@Nullable Set<String> parameters) {
         this.parameters = parameters;
-    }
-
-    public String getRemoteAddr() {
-        return remoteAddr;
-    }
-
-    public void setRemoteAddr(String remoteAddr) {
-        this.remoteAddr = remoteAddr;
-    }
-
-    public String getRemoteHost() {
-        return remoteHost;
-    }
-
-    public void setRemoteHost(String remoteHost) {
-        this.remoteHost = remoteHost;
     }
 
     public String getServiceName() {
