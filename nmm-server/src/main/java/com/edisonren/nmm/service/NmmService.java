@@ -13,4 +13,6 @@ public interface NmmService {
     public NmmResponse processNmmRequest(NmmRequest nmmRequest);
     public List<NmmResponse> getResponsesByScenario(Scenario scenario);
     public NmmResponse getResponseByScenarioId(String scenarioId);
+    public List<NmmResponse> deleteResponsesByScenario(Scenario scenario);
+    public NmmResponse deleteResponseByScenarioId(String scenarioId);
 }
