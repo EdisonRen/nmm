@@ -29,11 +29,14 @@ This project provides a simple(ME NOT INVOLVED) way to customize the response, b
 
 ## Getting Started
 
+## Tech Design
+
+- [The choice of message bus](https://github.com/EdisonRen/nmm/wiki/Choice-of-Message-Bus)
+- [The choice of persistence layer](https://github.com/EdisonRen/nmm/wiki/Choice-of-Persistence-Layer)
+
 ## TO BE ADDED TO WIKI
 
 - How to declare a Scenario
-
-- The choice of Event Bus
 
 - Prevent inconsistence between client and server caused by race condition
 
