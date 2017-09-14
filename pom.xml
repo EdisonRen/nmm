@@ -23,6 +23,7 @@
 
   <modules>
       <module>nmm-api</module> <!-- REMOVE LATER -->
+      <module>nmm-dao</module>
       <module>nmm-bus</module>
       <module>nmm-server</module>
   </modules>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,7 +30,9 @@ public class Controller {
     @RequestMapping(value = "/health-check",
             produces = {MediaType.TEXT_PLAIN_VALUE},
             method = RequestMethod.GET)
-    public String doshit() {
+    public String doshit(HttpServletRequest request) {
+        logger.info("Requested by {} {}", request.getRemoteAddr(), request.getRemoteHost());
+
         return "This shit works"; // TODO: use something more informative, or at least appropriate
     }
 
@@ -73,4 +76,6 @@ public class Controller {
         logger.info("match scenario by id");
         return nmmService.getResponseByScenarioId(scenarioId);
     }
+
+    // TODO: @ExceptionHandler
 }
