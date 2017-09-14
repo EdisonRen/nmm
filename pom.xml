@@ -12,13 +12,18 @@
 
   <properties>
     <java.version>1.8</java.version>
+    <spring.core.version>4.2.2.RELEASE</spring.core.version>
     <spring.boot.version>1.4.1.RELEASE</spring.boot.version>
+    <spring.redis.version>1.6.2.RELEASE</spring.redis.version>
     <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
     <fasterxml.jackson.version>2.6.3</fasterxml.jackson.version>
     <javax.servlet.version>2.5</javax.servlet.version>
     <junit.version>4.12</junit.version>
+    <redis.version>2.5.1</redis.version>
 
     <nmm.api.version>1.0-SNAPSHOT</nmm.api.version>
+    <nmm.dao.version>1.0-SNAPSHOT</nmm.dao.version>
+    <nmm.bus.version>1.0-SNAPSHOT</nmm.bus.version>
   </properties>
 
   <modules>
@@ -30,6 +35,24 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.edisonren.nmm</groupId>
+        <artifactId>nmm-api</artifactId>
+        <version>${nmm.api.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.edisonren.nmm</groupId>
+        <artifactId>nmm-dao</artifactId>
+        <version>${nmm.dao.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.edisonren.nmm</groupId>
+        <artifactId>nmm-bus</artifactId>
+        <version>${nmm.bus.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
