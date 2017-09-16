@@ -21,7 +21,6 @@ public class NmmModel  implements Serializable {
     private Integer mockVer;
     private JsonNode response;
 
-    // TODO: builder
     public static class NmmModelBuilder {
         private Scenario scenario;
         private ScenarioInfo scenarioInfo;
@@ -40,7 +39,7 @@ public class NmmModel  implements Serializable {
             return this;
         }
 
-        public NmmModelBuilder setMockVer(Integer MockVer) {
+        public NmmModelBuilder setMockVer(Integer mockVer) {
             this.mockVer = mockVer;
             return this;
         }
