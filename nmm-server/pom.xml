@@ -24,13 +24,17 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <version>${spring.boot.version}</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>com.edisonren.nmm</groupId>
       <artifactId>nmm-api</artifactId>
       <version>${nmm.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.edisonren.nmm</groupId>
+      <artifactId>nmm-dao</artifactId>
+      <version>${nmm.dao.version}</version>
     </dependency>
 
     <dependency>
