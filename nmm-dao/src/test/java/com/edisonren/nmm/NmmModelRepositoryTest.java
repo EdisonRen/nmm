@@ -5,5 +5,5 @@ package com.edisonren.nmm;
  */
 public class NmmModelRepositoryTest {
 
-    // TODO: add some tests
+    // TODO: embedded-redis
 }

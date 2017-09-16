@@ -1,10 +1,12 @@
 package com.edisonren.nmm.dao;
 
 import com.edisonren.nmm.model.NmmModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.Map;
 
 /**
@@ -13,12 +15,15 @@ import java.util.Map;
 @Repository
 public class NmmModelRepositoryImpl implements NmmModelRepository {
 
-    private RedisTemplate<String, NmmModel> redisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
     private HashOperations ops;
 
-    private NmmModelRepositoryImpl(RedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-        this.ops = redisTemplate.opsForHash();
+    public NmmModelRepositoryImpl() { }
+
+    @PostConstruct
+    public void init() {
+        ops = redisTemplate.opsForHash();
     }
 
     @Override

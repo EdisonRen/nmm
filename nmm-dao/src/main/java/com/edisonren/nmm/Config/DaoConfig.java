@@ -29,9 +29,11 @@ public class DaoConfig {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-        jedisConFactory.setHostName(hostName);
-        jedisConFactory.setPort(port);
-        return jedisConFactory;
+        // TODO: add Jedis sentinel to ConnFactor for monitor, notification and failover
+        // TODO: use pool
+        JedisConnectionFactory jedisConnFactory = new JedisConnectionFactory();
+        jedisConnFactory.setHostName(hostName);
+        jedisConnFactory.setPort(port);
+        return jedisConnFactory;
     }
 }
