@@ -22,6 +22,58 @@ public class NmmModel  implements Serializable {
     private JsonNode response;
 
     // TODO: builder
+    public static class NmmModelBuilder {
+        private Scenario scenario;
+        private ScenarioInfo scenarioInfo;
+        private Integer mockVer;
+        private JsonNode response;
+
+        public NmmModelBuilder() {}
+
+        public NmmModelBuilder setScenario(Scenario scenario) {
+            this.scenario = scenario;
+            return this;
+        }
+
+        public NmmModelBuilder setScenarioInfo(ScenarioInfo scenarioInfo) {
+            this.scenarioInfo = scenarioInfo;
+            return this;
+        }
+
+        public NmmModelBuilder setMockVer(Integer MockVer) {
+            this.mockVer = mockVer;
+            return this;
+        }
+
+        public NmmModelBuilder setResponse(JsonNode response) {
+            this.response = response;
+            return this;
+        }
+
+        public NmmModel build() {
+            assertField(scenario, "Scenario");
+            assertField(scenarioInfo, "ScenarioInfo");
+            assertField(mockVer, "MockVer");
+            assertField(response, "Response");
+
+            return new NmmModel(this);
+        }
+
+        private void assertField(Object field, String name) {
+            if (field == null) {
+                throw new IllegalArgumentException(String.format("%s is required by NmmModel.", name));
+            }
+        }
+    }
+
+    public NmmModel() {}
+
+    public NmmModel(NmmModelBuilder builder) {
+        this.scenario = builder.scenario;
+        this.scenarioInfo = builder.scenarioInfo;
+        this.mockVer = builder.mockVer;
+        this.response = builder.response;
+    }
 
     public Scenario getScenario() {
         return scenario;
