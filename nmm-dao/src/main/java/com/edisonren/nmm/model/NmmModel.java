@@ -3,9 +3,15 @@ package com.edisonren.nmm.model;
 import com.edisonren.nmm.v1.Scenario;
 import com.edisonren.nmm.v1.ScenarioInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -16,10 +22,14 @@ import java.io.Serializable;
 public class NmmModel  implements Serializable {
     private static final long serialVersionUID = 22L;
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectWriter writer = mapper.writer();
+    private static final ObjectReader reader = mapper.reader();
+
     private Scenario scenario;
     private ScenarioInfo scenarioInfo;
     private Integer mockVer;
-    private JsonNode response;
+    private byte[] response;
 
     public static class NmmModelBuilder {
         private Scenario scenario;
@@ -75,7 +85,7 @@ public class NmmModel  implements Serializable {
         this.scenario = builder.scenario;
         this.scenarioInfo = builder.scenarioInfo;
         this.mockVer = builder.mockVer;
-        this.response = builder.response;
+        setResponse(builder.response);
     }
 
     public Scenario getScenario() {
@@ -103,10 +113,18 @@ public class NmmModel  implements Serializable {
     }
 
     public JsonNode getResponse() {
-        return response;
+        try {
+            return reader.readTree(new ByteArrayInputStream(this.response));
+        } catch (IOException exception) {
+            throw new IllegalStateException("Failed to convert byte array to JsonNode.");
+        }
     }
 
     public void setResponse(JsonNode response) {
-        this.response = response;
+        try {
+            this.response = writer.writeValueAsBytes(response);
+        } catch (JsonProcessingException exception) {
+            throw new IllegalStateException("Failed to parse JsonNode to byte array.");
+        }
     }
 }
