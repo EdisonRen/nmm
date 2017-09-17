@@ -21,8 +21,7 @@ public class NmmModelBuilderTest {
     private static ObjectMapper mapper = new ObjectMapper();
 
     private static String serviceName = " (-__-) ";
-    private static String scenarioId = "v2";
-    private static Integer mockVer = 2;
+        private static Integer mockVer = 2;
     private static String response = "{\"a\" : 1}";
 
     private Scenario scenario = new Scenario();
@@ -31,7 +30,6 @@ public class NmmModelBuilderTest {
     @Test
     public void happyPath() throws Exception {
         scenario.setServiceName(serviceName);
-        info.setScenarioId(scenarioId);
 
         NmmModel model = new NmmModel.NmmModelBuilder()
                 .setScenario(scenario)
@@ -41,7 +39,7 @@ public class NmmModelBuilderTest {
                 .build();
 
         assertEquals(serviceName, model.getScenario().getServiceName());
-        assertEquals(scenarioId, model.getScenarioInfo().getScenarioId());
+        assertEquals(info.getScenarioId(), model.getScenarioInfo().getScenarioId());
         assertEquals(mockVer, model.getMockVer());
         assertEquals(1, model.getResponse().get("a").intValue());
     }
@@ -59,7 +57,21 @@ public class NmmModelBuilderTest {
     }
 
     @Test
+    public void missingServiceNameTest() throws Exception {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Scenario.serviceName is required by NmmModel.");
+
+        new NmmModel.NmmModelBuilder()
+                .setScenario(scenario)
+                .setScenarioInfo(info)
+                .setMockVer(mockVer)
+                .build();
+    }
+
+    @Test
     public void missingResponseTest() throws Exception {
+        scenario.setServiceName(serviceName);
+
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Response is required by NmmModel.");
 

@@ -51,7 +51,11 @@ public class NmmModel  implements Serializable {
 
         public NmmModel build() {
             assertField(scenario, "Scenario");
+            assertField(scenario.getServiceName(), "Scenario.serviceName");
+
             assertField(scenarioInfo, "ScenarioInfo");
+            assertField(scenarioInfo, "ScenarioInfo.ScenarioId");
+
             assertField(mockVer, "MockVer");
             assertField(response, "Response");
 

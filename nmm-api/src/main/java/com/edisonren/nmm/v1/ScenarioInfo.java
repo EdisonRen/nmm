@@ -1,5 +1,6 @@
 package com.edisonren.nmm.v1;
 
+import com.edisonren.nmm.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -12,14 +13,18 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize
 public class ScenarioInfo implements Serializable {
+    private static final String SCENARIO_PREFIX = "S";
     private static final long serialVersionUID = 4L;
 
     private String scenarioId; // UUID: S-xxx
     private Date createdDate;
-    private Date deletedDate;
     private Date updatedDate;
 
-    public ScenarioInfo() {}
+    public ScenarioInfo() {
+        this.scenarioId = Utils.generateUUID(SCENARIO_PREFIX);
+        this.createdDate = new Date();
+        this.updatedDate = new Date();
+    }
 
     public String getScenarioId() {
         return scenarioId;
@@ -35,14 +40,6 @@ public class ScenarioInfo implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public Date getDeletedDate() {
-        return deletedDate;
-    }
-
-    public void setDeletedDate(Date deletedDate) {
-        this.deletedDate = deletedDate;
     }
 
     public Date getUpdatedDate() {

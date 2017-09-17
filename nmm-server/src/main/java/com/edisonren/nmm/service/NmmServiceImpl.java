@@ -29,7 +29,7 @@ public class NmmServiceImpl implements NmmService {
         NmmModel model = new NmmModel.NmmModelBuilder()
                 .setMockVer(0)
                 .setScenario(nmmRequest.getScenario())
-                .setScenarioInfo(new ScenarioInfo())    // TODO: this is a dummy one!
+                .setScenarioInfo(new ScenarioInfo())
                 .setResponse(nmmRequest.getResponse())
                 .build();
 
