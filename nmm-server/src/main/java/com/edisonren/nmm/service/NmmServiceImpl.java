@@ -1,16 +1,12 @@
 package com.edisonren.nmm.service;
 
 import com.edisonren.nmm.dao.NmmModelRepository;
-import com.edisonren.nmm.model.NmmModel;
+import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmRequest;
-import com.edisonren.nmm.v1.NmmResponse;
-import com.edisonren.nmm.v1.Scenario;
 import com.edisonren.nmm.v1.ScenarioInfo;
 import com.edisonren.nmm.validator.NmmRequestValidator;
-import com.edisonren.nmm.validator.ScenarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +19,7 @@ public class NmmServiceImpl implements NmmService {
     private NmmModelRepository modelRepository;
 
     @Override
-    public NmmResponse processNmmRequest(NmmRequest nmmRequest) {
+    public NmmModel processNmmRequest(NmmRequest nmmRequest) {
         NmmRequestValidator.validate(nmmRequest);
 
         NmmModel model = new NmmModel.NmmModelBuilder()
@@ -34,33 +30,24 @@ public class NmmServiceImpl implements NmmService {
                 .build();
 
         modelRepository.saveNmmModel(model);
+        // TODO: publish to message bus
 
-        return new NmmResponse();
+        return model;
     }
 
     @Override
-    public List<NmmResponse> getResponsesByScenario(Scenario scenario) {
-        ScenarioValidator.validate(scenario);
-
-        return new ArrayList<>();
+    public List<NmmModel> getNmmModelByServiceName(String serviceName) {
+        return new ArrayList<>(
+                modelRepository.findNmmModelsByServiceName(serviceName).values());
     }
 
     @Override
-    public NmmResponse getResponseByScenarioId(String scenarioId) {
-
-
-        return new NmmResponse();
+    public NmmModel getNmmModel(String serviceName, String scenarioId) {
+        return modelRepository.getNmmModel(serviceName, scenarioId);
     }
 
     @Override
-    public List<NmmResponse> deleteResponsesByScenario(Scenario scenario) {
-
-        return new ArrayList<>();
-    }
-
-    @Override
-    public NmmResponse deleteResponseByScenarioId(String scenarioId) {
-
-        return new NmmResponse();
+    public Long deleteNmmModelByScenarioId(String serviceName, String scenarioId) {
+        return modelRepository.deleteNmmModel(serviceName, scenarioId);
     }
 }

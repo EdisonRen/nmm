@@ -1,9 +1,8 @@
 package com.edisonren.nmm.rest;
 
 import com.edisonren.nmm.service.NmmService;
+import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmRequest;
-import com.edisonren.nmm.v1.NmmResponse;
-import com.edisonren.nmm.v1.Scenario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,6 +44,8 @@ public class Controller {
 
     }
 
+    // TODO: update
+
     /**
      * Save the association of scenario and static response
      * , and publish it to message bus
@@ -51,31 +53,24 @@ public class Controller {
     @RequestMapping(value = "/", method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public NmmResponse processNmmRequest(@RequestBody NmmRequest request) {
+    public NmmModel processNmmRequest(@RequestBody NmmRequest request) {
         logger.info("process NmmRequest");
         return nmmService.processNmmRequest(request);
     }
 
-    /**
-     * For given Scenario, return all matched Responses.
-     *
-     * @param scenario payload and parameters are not used to evaluate the scenario.
-     * @return list of matched NmmResponse, whose scenario matches the given one.
-     */
-    @RequestMapping(value = "/match", method = RequestMethod.POST,
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public List<NmmResponse> matchScenario(@RequestBody Scenario scenario) {
-        logger.info("match scenario");
-        return nmmService.getResponsesByScenario(scenario);
-    }
-
-    @RequestMapping(value = "/match/{scenarioId}", method = RequestMethod.GET,
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public NmmResponse getNmmResponseByLoanId(@PathVariable("scenarioId") String scenarioId) {
-        logger.info("match scenario by id");
-        return nmmService.getResponseByScenarioId(scenarioId);
-    }
+//    @RequestMapping(value = "/{serviceName}/{scenarioId}", method = RequestMethod.GET,
+//            produces = {MediaType.APPLICATION_JSON_VALUE})
+//    public List<NmmModel> getNmmResponseByServiceNameScenarioId(
+//            @PathVariable("serviceName") String serviceName,
+//            @PathVariable("scenarioId") String scenarioId) {
+//        if (scenarioId == null) {
+//            logger.info("Get NmmModels by serviceName {}.", serviceName);
+//            return nmmService.getNmmModelByServiceName(serviceName);
+//        } else {
+//            logger.info("Get NmmModel by {},{}.", serviceName, scenarioId);
+//            return Collections.singletonList(nmmService.getNmmModel(serviceName, scenarioId));
+//        }
+//    }
 
     // TODO: @ExceptionHandler
 }

@@ -1,8 +1,7 @@
 package com.edisonren.nmm.service;
 
+import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmRequest;
-import com.edisonren.nmm.v1.NmmResponse;
-import com.edisonren.nmm.v1.Scenario;
 
 import java.util.List;
 
@@ -10,9 +9,10 @@ import java.util.List;
  * Created by edison on 9/3/17.
  */
 public interface NmmService {
-    public NmmResponse processNmmRequest(NmmRequest nmmRequest);
-    public List<NmmResponse> getResponsesByScenario(Scenario scenario);
-    public NmmResponse getResponseByScenarioId(String scenarioId);
-    public List<NmmResponse> deleteResponsesByScenario(Scenario scenario);
-    public NmmResponse deleteResponseByScenarioId(String scenarioId);
+    public NmmModel processNmmRequest(NmmRequest nmmRequest);
+
+    public List<NmmModel> getNmmModelByServiceName(String ServiceName);
+    public NmmModel getNmmModel(String serviceName, String scenarioId);
+
+    public Long deleteNmmModelByScenarioId(String serviceName, String scenarioId);
 }
