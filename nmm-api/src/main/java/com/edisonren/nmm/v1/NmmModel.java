@@ -1,7 +1,5 @@
-package com.edisonren.nmm.model;
+package com.edisonren.nmm.v1;
 
-import com.edisonren.nmm.v1.Scenario;
-import com.edisonren.nmm.v1.ScenarioInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

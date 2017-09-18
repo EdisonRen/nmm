@@ -1,6 +1,6 @@
 package com.edisonren.nmm.dao;
 
-import com.edisonren.nmm.model.NmmModel;
+import com.edisonren.nmm.v1.NmmModel;
 
 import java.util.Map;
 
@@ -10,6 +10,9 @@ import java.util.Map;
 public interface NmmModelRepository {
     public void saveNmmModel(NmmModel model);
     public void updateNmmModel(NmmModel model);
+
     public Map<String, NmmModel> findNmmModelsByServiceName(String serviceName);
-    public void deleteNmmModel(String serviceName, String scenarioId);
+    public NmmModel getNmmModel(String serviceName, String scenarioId);
+
+    public Long deleteNmmModel(String serviceName, String scenarioId);
 }

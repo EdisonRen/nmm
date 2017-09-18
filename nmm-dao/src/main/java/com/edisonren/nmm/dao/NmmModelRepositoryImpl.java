@@ -1,6 +1,8 @@
 package com.edisonren.nmm.dao;
 
-import com.edisonren.nmm.model.NmmModel;
+import com.edisonren.nmm.v1.NmmModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,6 +16,7 @@ import java.util.Map;
  */
 @Repository
 public class NmmModelRepositoryImpl implements NmmModelRepository {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -28,12 +31,14 @@ public class NmmModelRepositoryImpl implements NmmModelRepository {
 
     @Override
     public void saveNmmModel(NmmModel model) {
-        put(model);
+        ops.putIfAbsent(model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId(), model);
+        logger.info("{}:{} Persisted.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
     }
 
     @Override
     public void updateNmmModel(NmmModel model) {
-        put(model);
+        ops.put(model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId(), model);
+        logger.info("{}:{} Persisted.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
     }
 
     @Override
@@ -42,11 +47,12 @@ public class NmmModelRepositoryImpl implements NmmModelRepository {
     }
 
     @Override
-    public void deleteNmmModel(String serviceName, String scenarioId) {
-        ops.delete(serviceName, scenarioId);
+    public NmmModel getNmmModel(String serviceName, String scenarioId) {
+        return (NmmModel)ops.get(serviceName, scenarioId);
     }
 
-    private void put(NmmModel model) {
-        ops.put(model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId(), model);
+    @Override
+    public Long deleteNmmModel(String serviceName, String scenarioId) {
+        return ops.delete(serviceName, scenarioId);
     }
 }
