@@ -11,6 +11,9 @@
 .idea/
 *.iml
 
+# Redis
+dump.rdb
+
 # MAC
 .DS_Store
 
