@@ -3,6 +3,7 @@ package com.edisonren.nmm.rest;
 import com.edisonren.nmm.service.NmmService;
 import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
@@ -47,8 +49,10 @@ public class Controller {
     // TODO: update
 
     /**
-     * Save the association of scenario and static response
-     * , and publish it to message bus
+     * Save the association of scenario and static response, and publish it to message bus
+     *
+     * @param request
+     * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -58,19 +62,29 @@ public class Controller {
         return nmmService.processNmmRequest(request);
     }
 
-//    @RequestMapping(value = "/{serviceName}/{scenarioId}", method = RequestMethod.GET,
-//            produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public List<NmmModel> getNmmResponseByServiceNameScenarioId(
-//            @PathVariable("serviceName") String serviceName,
-//            @PathVariable("scenarioId") String scenarioId) {
-//        if (scenarioId == null) {
-//            logger.info("Get NmmModels by serviceName {}.", serviceName);
-//            return nmmService.getNmmModelByServiceName(serviceName);
-//        } else {
-//            logger.info("Get NmmModel by {},{}.", serviceName, scenarioId);
-//            return Collections.singletonList(nmmService.getNmmModel(serviceName, scenarioId));
-//        }
-//    }
+    /**
+     * <p>Get specific NmmModel for given serviceName and scenarioId.
+     * <p>Get all NmmModel associated with the ServiceName if scenario is absent.
+     *
+     * @param serviceName
+     * @param scenarioId
+     * @return List of NmmModel or 404.
+     */
+    @RequestMapping(value = "/query", method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<NmmModel> getNmmResponseByServiceNameAndScenarioId(
+            @RequestParam("serviceName") String serviceName,
+            @RequestParam(name="scenarioId", required = false) String scenarioId) {
+        if (StringUtils.isEmpty(serviceName)) {
+            throw new IllegalArgumentException("ServiceName is required.");
+        } else if (StringUtils.isEmpty(scenarioId)) {
+            logger.info("Get NmmModels by serviceName {}.", serviceName);
+            return nmmService.getNmmModelByServiceName(serviceName);
+        } else {
+            logger.info("Get NmmModel by {},{}.", serviceName, scenarioId);
+            return Collections.singletonList(nmmService.getNmmModel(serviceName, scenarioId));
+        }
+    }
 
     // TODO: @ExceptionHandler
 }

@@ -18,4 +18,12 @@ public class NmmRequestValidator {
 
         ScenarioValidator.validate(request.getScenario());
     }
+
+    public static void validateServiceName(String serviceName) {
+        // TODO: for security
+    }
+
+    public static void validateScenarioId(String scenarioId) {
+        // TODO: for security
+    }
 }
