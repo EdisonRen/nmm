@@ -32,13 +32,13 @@ public class NmmModelRepositoryImpl implements NmmModelRepository {
     @Override
     public void saveNmmModel(NmmModel model) {
         ops.putIfAbsent(model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId(), model);
-        logger.info("{}:{} Persisted.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
+        logger.info("{}:{} Saved.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
     }
 
     @Override
     public void updateNmmModel(NmmModel model) {
         ops.put(model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId(), model);
-        logger.info("{}:{} Persisted.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
+        logger.info("{}:{} Updated.", model.getScenario().getServiceName(), model.getScenarioInfo().getScenarioId());
     }
 
     @Override
