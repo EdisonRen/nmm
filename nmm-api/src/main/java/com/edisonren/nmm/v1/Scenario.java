@@ -24,6 +24,8 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize
 public class Scenario implements Serializable {
+    public static final String PREFIX = "S";
+
     private static final long serialVersionUID = 3L;
 
     // ----------------------------------------------------------------

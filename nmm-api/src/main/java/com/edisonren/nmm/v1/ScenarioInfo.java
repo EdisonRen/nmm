@@ -13,7 +13,6 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize
 public class ScenarioInfo implements Serializable {
-    private static final String SCENARIO_PREFIX = "S";
     private static final long serialVersionUID = 4L;
 
     private String scenarioId; // UUID: S-xxx
@@ -21,7 +20,7 @@ public class ScenarioInfo implements Serializable {
     private Date updatedDate;
 
     public ScenarioInfo() {
-        this.scenarioId = Utils.generateUUID(SCENARIO_PREFIX);
+        this.scenarioId = Utils.generateUUID(Scenario.PREFIX);
         this.createdDate = new Date();
         this.updatedDate = new Date();
     }
