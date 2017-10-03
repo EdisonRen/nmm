@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class Controller {
      */
     @RequestMapping(value = "/query", method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<NmmModel> getNmmResponseByServiceNameAndScenarioId(
+    public List<NmmModel> getNmmModelByServiceNameAndScenarioId(
             @RequestParam("serviceName") String serviceName,
             @RequestParam(name="scenarioId", required = false) String scenarioId) {
         if (StringUtils.isEmpty(serviceName)) {
@@ -86,5 +87,42 @@ public class Controller {
         }
     }
 
+    /**
+     * Detele by ServiceName and SenarioId.
+     *
+     * @param serviceName
+     * @param scenarioId
+     * @return Number of removed NmmModel
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Long deleteNmmModelByServiceNameAndScenarioId(
+            @RequestParam("serviceName") String serviceName,
+            @RequestParam("scenarioId") String scenarioId) {
+        logger.info("Delete NmmModel by {}:{}", serviceName, scenarioId);
+        return nmmService.deleteNmmModelByScenarioId(serviceName, scenarioId);
+    }
+
+    /**
+     * Detele by ServiceName and SenarioId.
+     *
+     * @param serviceName
+     * @return the NmmModel deleted
+     */
+    @RequestMapping(value = "/purgeService", method = RequestMethod.DELETE,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<NmmModel> deleteNmmResponseByServiceName(
+            @RequestParam("serviceName") String serviceName) {
+        logger.info("Purge NmmModels by serviceName:{}", serviceName);
+        List<NmmModel> models = nmmService.getNmmModelByServiceName(serviceName);
+        models.stream()
+                .map(model -> model.getScenarioInfo().getScenarioId())
+                .forEach(id -> nmmService.deleteNmmModelByScenarioId(serviceName, id));
+
+        return models;
+    }
+
+
+    // TODO: add integration tests, of course
     // TODO: @ExceptionHandler
 }
