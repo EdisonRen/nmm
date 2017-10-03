@@ -21,6 +21,7 @@ public class NmmRequest implements Serializable {
 
     private Scenario scenario;
     private JsonNode response;
+    private Integer priority;
 
     public NmmRequest() {}
 
@@ -38,5 +39,13 @@ public class NmmRequest implements Serializable {
 
     public void setResponse(JsonNode response) {
         this.response = response;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 }

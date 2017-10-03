@@ -1,14 +1,14 @@
 package com.edisonren.nmm.v1;
 
-import com.edisonren.nmm.utils.LocalDateDeserializer;
-import com.edisonren.nmm.utils.LocalDateSerializer;
+import com.edisonren.nmm.utils.LocalDateTimeDeserializer;
+import com.edisonren.nmm.utils.LocalDateTimeSerializer;
 import com.edisonren.nmm.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by edison on 9/2/17.
@@ -20,18 +20,18 @@ public class ScenarioInfo implements Serializable {
 
     private String scenarioId; // UUID: S-xxx
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate createdDate;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime createdDate;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate updatedDate;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime updatedDate;
 
     public ScenarioInfo() {
         this.scenarioId = Utils.generateUUID(Scenario.PREFIX);
-        this.createdDate = LocalDate.now();
-        this.updatedDate = LocalDate.now();
+        this.createdDate = LocalDateTime.now();
+        this.updatedDate = LocalDateTime.now();
     }
 
     public String getScenarioId() {
@@ -42,19 +42,19 @@ public class ScenarioInfo implements Serializable {
         this.scenarioId = scenarioId;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public LocalDate getUpdatedDate() {
+    public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(LocalDate updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 }
