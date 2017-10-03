@@ -1,6 +1,8 @@
 package com.edisonren.nmm;
 
 import com.edisonren.nmm.utils.Utils;
+import com.edisonren.nmm.v1.ScenarioInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
