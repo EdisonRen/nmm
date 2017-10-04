@@ -1,7 +1,6 @@
 package com.edisonren.nmm.service;
 
 import com.edisonren.nmm.dao.NmmModelRepository;
-import com.edisonren.nmm.utils.Utils;
 import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmRequest;
 import com.edisonren.nmm.v1.ScenarioInfo;
