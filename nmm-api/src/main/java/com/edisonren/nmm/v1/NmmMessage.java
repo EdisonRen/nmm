@@ -1,5 +1,7 @@
 package com.edisonren.nmm.v1;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -17,13 +19,19 @@ public class NmmMessage {
     public NmmMessage(NmmOperation operation, NmmModel model) {
         this.operation = operation;
         this.model = model;
+
+        if (model == null || model.getScenario() == null ||
+                StringUtils.isEmpty(model.getScenario().getServiceName())) {
+            throw new IllegalArgumentException("NmmMessage_Construction Invalid scenario.");
+        }
+        this.serviceName = model.getScenario().getServiceName();
     }
 
     @Nonnull
     public NmmOperation getOperation() {
         return operation;
     }
-    
+
     public void setOperation(NmmOperation operation) {
         this.operation = operation;
     }
