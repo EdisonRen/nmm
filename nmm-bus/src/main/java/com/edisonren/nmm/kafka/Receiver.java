@@ -1,4 +1,4 @@
-package com.edisonren.nmm;
+package com.edisonren.nmm.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;

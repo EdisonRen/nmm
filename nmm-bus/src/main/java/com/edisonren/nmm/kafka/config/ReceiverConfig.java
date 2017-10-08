@@ -1,6 +1,6 @@
-package com.edisonren.nmm.config;
+package com.edisonren.nmm.kafka.config;
 
-import com.edisonren.nmm.Receiver;
+import com.edisonren.nmm.kafka.Receiver;
 import com.edisonren.nmm.v1.NmmModel;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

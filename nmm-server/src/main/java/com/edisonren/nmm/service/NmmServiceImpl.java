@@ -1,6 +1,6 @@
 package com.edisonren.nmm.service;
 
-import com.edisonren.nmm.Sender;
+import com.edisonren.nmm.kafka.Sender;
 import com.edisonren.nmm.dao.NmmModelRepository;
 import com.edisonren.nmm.v1.NmmMessage;
 import com.edisonren.nmm.v1.NmmModel;

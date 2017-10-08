@@ -1,4 +1,4 @@
-package com.edisonren.nmm.config;
+package com.edisonren.nmm.kafka.config;
 
 import com.edisonren.nmm.Config.DaoConfig;
 import com.edisonren.nmm.service.NmmService;

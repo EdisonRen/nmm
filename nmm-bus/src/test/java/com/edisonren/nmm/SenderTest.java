@@ -1,5 +1,6 @@
 package com.edisonren.nmm;
 
+import com.edisonren.nmm.kafka.Sender;
 import com.edisonren.nmm.v1.NmmMessage;
 import com.edisonren.nmm.v1.NmmModel;
 import com.edisonren.nmm.v1.NmmOperation;
@@ -10,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +30,6 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.kafka.test.assertj.KafkaConditions.key;
 
 /**
  * Created by edison on 10/7/17.
@@ -101,7 +98,7 @@ public class SenderTest {
         // check that the message was received
         ConsumerRecord<String, NmmMessage> received = records.poll(10, TimeUnit.SECONDS);
         // Hamcrest Matchers to check the value
-//        LOGGER.info(received.value().getServiceName());
+        //LOGGER.info(received.value().getServiceName());
         //assertThat(received, hasValue(greeting));
         // AssertJ Condition to check the key
         //assertThat(received).has(key(null));

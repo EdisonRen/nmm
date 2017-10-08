@@ -1,6 +1,6 @@
-package com.edisonren.nmm.config;
+package com.edisonren.nmm.kafka.config;
 
-import com.edisonren.nmm.Sender;
+import com.edisonren.nmm.kafka.Sender;
 import com.edisonren.nmm.v1.NmmMessage;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

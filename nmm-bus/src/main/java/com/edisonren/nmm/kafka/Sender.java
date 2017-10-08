@@ -1,4 +1,4 @@
-package com.edisonren.nmm;
+package com.edisonren.nmm.kafka;
 
 import com.edisonren.nmm.v1.NmmMessage;
 import com.edisonren.nmm.v1.NmmModel;
