@@ -34,6 +34,11 @@
       <artifactId>nmm-dao</artifactId>
       <version>${nmm.dao.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.edisonren.nmm</groupId>
+      <artifactId>nmm-bus</artifactId>
+      <version>${nmm.bus.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>javax.inject</groupId>

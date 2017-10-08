@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
  * Created by edison on 9/3/17.
  */
 @Configuration
-@Import({DaoConfig.class})
+@Import({DaoConfig.class, SenderConfig.class})
 //@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(value = {"com.edisonren.nmm"})
 public class NmmServiceConfig {

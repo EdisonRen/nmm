@@ -51,7 +51,7 @@ public class SenderConfig {
     }
 
     @Bean
-    public Sender sender(KafkaTemplate<String, NmmMessage> template) {
+    public Sender sender() {
         return new Sender(kafkaTemplate());
     }
 }

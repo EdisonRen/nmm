@@ -1,7 +1,10 @@
 package com.edisonren.nmm.service;
 
+import com.edisonren.nmm.Sender;
 import com.edisonren.nmm.dao.NmmModelRepository;
+import com.edisonren.nmm.v1.NmmMessage;
 import com.edisonren.nmm.v1.NmmModel;
+import com.edisonren.nmm.v1.NmmOperation;
 import com.edisonren.nmm.v1.NmmRequest;
 import com.edisonren.nmm.v1.ScenarioInfo;
 import com.edisonren.nmm.validator.NmmRequestValidator;
@@ -18,6 +21,9 @@ public class NmmServiceImpl implements NmmService {
     @Autowired
     private NmmModelRepository modelRepository;
 
+    @Autowired
+    private Sender sender;
+
     @Override
     public NmmModel processNmmRequest(NmmRequest nmmRequest) {
         NmmRequestValidator.validate(nmmRequest);
@@ -30,7 +36,8 @@ public class NmmServiceImpl implements NmmService {
                 .build();
 
         modelRepository.saveNmmModel(model);
-        // TODO: publish to message bus
+
+        sender.send(new NmmMessage(NmmOperation.CREATE, model));
 
         return model;
     }
@@ -55,6 +62,8 @@ public class NmmServiceImpl implements NmmService {
     public Long deleteNmmModelByScenarioId(String serviceName, String scenarioId) {
         NmmRequestValidator.validateServiceName(serviceName);
         NmmRequestValidator.validateScenarioId(scenarioId);
+
+        // TODO: publish DELETE NmmMessage
 
         return modelRepository.deleteNmmModel(serviceName, scenarioId);
     }
