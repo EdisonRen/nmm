@@ -64,7 +64,6 @@ public class NmmModel  implements Serializable {
             assertField(scenarioInfo, "ScenarioInfo");
             assertField(scenarioInfo, "ScenarioInfo.ScenarioId");
 
-            assertField(mockVer, "MockVer");
             assertField(response, "Response");
 
             return new NmmModel(this);
@@ -77,6 +76,7 @@ public class NmmModel  implements Serializable {
         }
     }
 
+    // TODO: make this private
     public NmmModel() {}
 
     public NmmModel(NmmModelBuilder builder) {
