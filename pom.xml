@@ -24,6 +24,7 @@
     <nmm.bus.version>1.0-SNAPSHOT</nmm.bus.version>
 
     <spring.kafka.version>1.2.2.RELEASE</spring.kafka.version>
+    <aspectj.weaver.version>1.8.11</aspectj.weaver.version>
   </properties>
 
   <modules>
@@ -88,6 +89,12 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+        <version>${spring.boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
         <version>${spring.boot.version}</version>
       </dependency>
 
